@@ -1,0 +1,14 @@
+platform :ios,'8.0'
+
+target 'ZhiHuDaily_Swift' do
+
+use_frameworks!
+pod 'RxSwift'
+pod 'RxCocoa' 
+pod 'RxDataSources'
+pod 'SnapKit'
+pod 'Moya/RxSwift'
+pod 'HandyJSON', '~> 4.0.0-beta.1'
+
+end
+
