@@ -3,4 +3,4 @@
 
 效果图：
 
-![ScreenShot](https://github.com/Xiaoye220/Demos/blob/master/ZhiHuDaily-RxSwift-Moya/ScreenShot/ScreenShot.gif)
+![ScreenShot](https://github.com/Xiaoye220/iOS_SmallProgram/blob/master/ZhiHuDaily-RxSwift-Moya/ScreenShot/ScreenShot.gif)
