@@ -6,7 +6,7 @@
 通过截图对问答类app进行答案搜索
 
 ### 效果图:
-!(screenshot)[https://github.com/Xiaoye220/iOS_SmallProgram/blob/master/QuestionAnswerer/ScreenShot/ScreenShot.gif]
+![screenshot](https://github.com/Xiaoye220/iOS_SmallProgram/blob/master/QuestionAnswerer/ScreenShot/ScreenShot.gif)
 
 ### 实现原理:
 1. app 运行点击开始，在后台播放无声音乐，使其一直保持在后台运行。
@@ -21,8 +21,9 @@
 #### OCR 实现
 
 代码中针对 OCR 有两个类
-```BaiduOCRService```: (百度OCR企业版)[http://apistore.baidu.com/apiworks/servicedetail/969.html?hp.com]，前200次免费
-```BaiduYunOCRService```: (百度云文字识别)[https://cloud.baidu.com/product/ocr]，每天有定量免费 
+```BaiduOCRService```: [百度OCR企业版](http://apistore.baidu.com/apiworks/servicedetail/969.html?hp.com)，前200次免费
+
+```BaiduYunOCRService```: [百度云文字识别](https://cloud.baidu.com/product/ocr)，每天有定量免费 
 
 两个类中的 apiKey, secretKey 填写自己的
 ```swift
