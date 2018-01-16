@@ -18,21 +18,37 @@
 
 ### 代码相关：
 
-#### OCR 实现
+#### * 后台持续运行
 
-代码中针对 OCR 有两个类
-```BaiduOCRService```: [百度OCR企业版](http://apistore.baidu.com/apiworks/servicedetail/969.html?hp.com)，前200次免费
-
-```BaiduYunOCRService```: [百度云文字识别](https://cloud.baidu.com/product/ocr)，每天有定量免费 
-
-两个类中的 apiKey, secretKey 填写自己的
+在 ```AppDelegate``` 中添加
 ```swift
-// 你自己的 apiKey 和 secretKey
-let apiKey = "..."
-let secretKey = "..."
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    // Override point for customization after application launch.
+    // 让音乐可以在后台运行
+    // 在后台播放无声的 mp3 可以保证 app 在后台也可以一直运行
+    let session = AVAudioSession.sharedInstance()
+    do {
+        try session.setActive(true)
+        // 设置 option 为 mixWithOthers，否则打开其他带音频播放的app，本 app 的 avplayer 会停止播放，就无法保持后台一直运行了
+        try session.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers)
+    } catch {
+        print(error)
+    }
+}
 ```
 
-#### 截图监听
+然后创建一个 ```AVPlayer```，只要 player 在 play，那么就会一直在后台运行
+
+定时让 player 从头播放，避免播放完后在后台不运行了
+
+```swift
+self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+    self.player.seek(to: kCMTimeZero)
+}
+self.player.play()
+```
+
+#### * 截图监听
 
 通过类 ```ScreenshotPhotoService``` 实现
 
@@ -42,6 +58,8 @@ let secretKey = "..."
 self.assetsFetchResults = PHAsset.fetchAssets(with: .image, options: self.allPhotosOptions)
 //监听资源改变
 PHPhotoLibrary.shared().register(self)
+
+
 
 //PHPhotoLibraryChangeObserver代理实现，图片新增、删除、修改开始后会触发
 extension ScreenshotPhotoService: PHPhotoLibraryChangeObserver {
@@ -76,10 +94,27 @@ extension ScreenshotPhotoService: PHPhotoLibraryChangeObserver {
 }
 ```
 
-#### 百度搜索
+#### * OCR 实现
+
+代码中针对 OCR 有两个类
+
+```BaiduOCRService```: [百度OCR企业版](http://apistore.baidu.com/apiworks/servicedetail/969.html?hp.com)，前200次免费
+
+```BaiduYunOCRService```: [百度云文字识别](https://cloud.baidu.com/product/ocr)，每天有定量免费 
+
+两个类中的 apiKey, secretKey 填写自己的
+```swift
+// 你自己的 apiKey 和 secretKey
+let apiKey = "..."
+let secretKey = "..."
+```
+
+#### * 百度搜索
 
 实现了两种搜索
+
 ```BaiduSearchQuestionOnlyService```: 只搜索题目
+
 ```BaiduSearchWithAnswerService```: 继承 ```BaiduSearchQuestionOnlyService```，将题目和答案组合搜索
 
 搜索类实现了协议 ```BaiduSearchType```，里面写死了请求 url、header
@@ -122,35 +157,7 @@ extension BaiduSearchType {
 }
 ```
 
-#### 后台持续运行
 
-在 ```AppDelegate``` 中添加
-```swift
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
-    // 让音乐可以在后台运行
-    // 在后台播放无声的 mp3 可以保证 app 在后台也可以一直运行
-    let session = AVAudioSession.sharedInstance()
-    do {
-        try session.setActive(true)
-        // 设置 option 为 mixWithOthers，否则打开其他带音频播放的app，本 app 的 avplayer 会停止播放，就无法保持后台一直运行了
-        try session.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers)
-    } catch {
-        print(error)
-    }
-}
-```
-
-然后创建一个 ```AVPlayer```，只要 player 在 play，那么就会一直在后台运行
-
-定时让 player 从头播放，避免播放完后在后台不运行了
-
-```swift
-self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-    self.player.seek(to: kCMTimeZero)
-}
-self.player.play()
-```
 
 
 
