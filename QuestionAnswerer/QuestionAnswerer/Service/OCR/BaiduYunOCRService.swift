@@ -16,8 +16,8 @@ import SwiftyJSON
 class BaiduYunOCRService: OCRType {
     
     // 你自己的 apiKey 和 secretKey
-    let apiKey = "kQFIbM9bq9xFolhVxKsAGThG"
-    let secretKey = "LCXwgmeWUrNGMyMdPMG3233I4AP9y4yD"
+    let apiKey = "..."
+    let secretKey = "..."
     
     init() {
         AipOcrService.shard().auth(withAK: apiKey, andSK: secretKey)

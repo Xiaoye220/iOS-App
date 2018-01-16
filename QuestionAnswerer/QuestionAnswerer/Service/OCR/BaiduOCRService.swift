@@ -15,7 +15,7 @@ import SwiftyJSON
 class BaiduOCRService: OCRType {
     
     // 你自己的 apikey
-    let apikey = "8be1c31a4726b6b7934ca6a6f528d5ea"
+    let apikey = "..."
     
     init() { }
 
