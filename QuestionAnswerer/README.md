@@ -18,7 +18,7 @@
 
 ### 代码相关：
 
-#### * 后台持续运行
+#### 1.后台持续运行
 
 在 ```AppDelegate``` 中添加
 ```swift
@@ -48,7 +48,7 @@ self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
 self.player.play()
 ```
 
-#### * 截图监听
+#### 2.截图监听
 
 通过类 ```ScreenshotPhotoService``` 实现
 
@@ -94,7 +94,7 @@ extension ScreenshotPhotoService: PHPhotoLibraryChangeObserver {
 }
 ```
 
-#### * OCR 实现
+#### 3.OCR 实现
 
 代码中针对 OCR 有两个类
 
@@ -109,7 +109,7 @@ let apiKey = "..."
 let secretKey = "..."
 ```
 
-#### * 百度搜索
+#### 4.百度搜索
 
 实现了两种搜索
 
