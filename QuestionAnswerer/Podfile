@@ -1,0 +1,14 @@
+platform :ios,'8.0'
+
+target 'QuestionAnswerer' do
+
+use_frameworks!
+
+pod 'SwiftyJSON'
+pod 'YFIconFont'
+pod 'SnapKit'
+pod 'RxSwift'
+pod 'RxCocoa'
+
+end
+
