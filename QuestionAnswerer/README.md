@@ -18,6 +18,8 @@
 
 ### 代码相关：
 
+**重要的事：```BaiduYunOCRService```，```BaiduYunOCRService``` 中的 apikey,secretKey 记得换成自己的**
+
 #### 1.后台持续运行
 
 在 ```AppDelegate``` 中添加
