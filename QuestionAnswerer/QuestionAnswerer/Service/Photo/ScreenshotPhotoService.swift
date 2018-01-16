@@ -58,7 +58,7 @@ class ScreenshotPhotoService: NSObject, PhotoType {
             PHPhotoLibrary.shared().unregisterChangeObserver(self)
         }
     }
-    
+    /*
     func requestLatestPhoto(_ comletion: @escaping (UIImage?) -> Void) {
         doWhilePHPhotoLibraryAuthorized {
             //获取目前所有照片资源
@@ -76,7 +76,7 @@ class ScreenshotPhotoService: NSObject, PhotoType {
                 }
             }
         }
-    }
+    }*/
     
     // 当已经获取到相册权限时执行
     func doWhilePHPhotoLibraryAuthorized(_ handle: @escaping () -> Void) {
