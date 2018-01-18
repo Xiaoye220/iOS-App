@@ -21,7 +21,7 @@ class SettingViewController: UIViewController {
     var viewModel: SettingViewModel!
     
     let sections: [Section] = [.game, .duration, .searchMode]
-    let contents: [[SettingType]] = [[Game.cddh, Game.zscr, Game.xgsp],
+    let contents: [[SettingType]] = [[Game.cddh, Game.zscr, Game.xgsp, Game.xmzb],
                                      [Duration._20minutes, Duration._30minutes, Duration._1hours],
                                      [SearchMode.questionOnly, SearchMode.questionWithAnswer, SearchMode.all]]
     

@@ -194,6 +194,21 @@ extension RootViewController: PhotoDelegate {
         }
         question = question.trimmingCharacters(in: .decimalDigits)
         question = question.replacingOccurrences(of: ".", with: "")
+        
+        // 去掉熊猫直播题目的 A. B. C.
+        switch MySetting.game {
+        case .xmzb:
+            answers = answers.map { answer in
+                var realAnswer = answer
+                if answer.first == "A" || answer.first == "B" || answer.first == "C" {
+                    realAnswer = String(answer.dropFirst()).replacingOccurrences(of: ".", with: "")
+                }
+                return realAnswer
+            }
+        default:
+            break
+        }
+        
         return (question, answers)
     }
     

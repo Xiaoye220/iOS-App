@@ -14,6 +14,7 @@ enum Game: String {
     case cddh = "冲顶大会"
     case zscr = "芝士超人"
     case xgsp = "西瓜视频 百万英雄"
+    case xmzb = "熊猫直播 一智千金"
     case other = "其他"
 }
 
@@ -29,6 +30,8 @@ extension Game {
             return CGRect(minX: 0, maxX: 100, totalX: 100, minY: 13, maxY: 55, totalY: 100)
         case .xgsp:
             return CGRect(minX: 4, maxX: 96, totalX: 100, minY: 15, maxY: 62, totalY: 100)
+        case .xmzb:
+            return CGRect(minX: 4, maxX: 96, totalX: 100, minY: 22, maxY: 56, totalY: 100)
         default:
             return nil
         }
