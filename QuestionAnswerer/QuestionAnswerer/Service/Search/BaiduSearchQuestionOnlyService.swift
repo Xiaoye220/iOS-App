@@ -62,15 +62,29 @@ class BaiduSearchQuestionOnlyService: BaiduSearchType {
     /// 解析搜索到的结果，简单的统计了每个答案在结果中出现的次数，排序
     func parserText(_ text: String) -> Result {
         var finalText = text
-        let com1 = text.components(start: "<div id=\"content_left\">", end: "<div id=\"rs\">")
-        if com1.count > 0 {
-            let com2 = com1[0].components(start: ">", end: "<")
-            finalText = com2.reduce(String()) { return $0 + $1 }
+        var com: [String] = []
+        
+        if finalText.contains("<div id=\"rs\">") {
+            com = text.components(start: "<div id=\"content_left\">", end: "<div id=\"rs\">")
+        } else if finalText.contains("<div id=\"page\" >") {
+            com = text.components(start: "<div id=\"content_left\">", end: "<div id=\"page\" >")
+        }
+        if com.count > 0 {
+            let subCom = com[0].components(start: ">", end: "<")
+            finalText = subCom.reduce(String()) { return $0 + $1 }
         }
         
-        let count_1 = finalText.components(separatedBy: answer_1).count - 1
-        let count_2 = finalText.components(separatedBy: answer_2).count - 1
-        let count_3 = finalText.components(separatedBy: answer_3).count - 1
+        var count_1 = finalText.components(separatedBy: answer_1).count - 1
+        var count_2 = finalText.components(separatedBy: answer_2).count - 1
+        var count_3 = finalText.components(separatedBy: answer_3).count - 1
+        
+        print(finalText)
+        
+        if count_1 == 0 && count_2 == 0 && count_3 == 0 {
+            count_1 = (finalText.components(separatedBy: CharacterSet(charactersIn: answer_1)).count - 1) / answer_1.count
+            count_2 = (finalText.components(separatedBy: CharacterSet(charactersIn: answer_2)).count - 1) / answer_2.count
+            count_3 = (finalText.components(separatedBy: CharacterSet(charactersIn: answer_3)).count - 1) / answer_3.count
+        }
         
         var result = [(answer_1, count_1),
                       (answer_2, count_2),
