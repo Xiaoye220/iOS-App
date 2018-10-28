@@ -11,3 +11,4 @@
 
 通过截图对问答类app进行答案搜索
 
+![screenshot](https://github.com/Xiaoye220/iOS_SmallProgram/blob/master/QuestionAnswerer/ScreenShot/ScreenShot.gif)
