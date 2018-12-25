@@ -1,6 +1,0 @@
-framework module YFIconFont {
-  umbrella header "YFIconFont-umbrella.h"
-
-  export *
-  module * { export * }
-}
