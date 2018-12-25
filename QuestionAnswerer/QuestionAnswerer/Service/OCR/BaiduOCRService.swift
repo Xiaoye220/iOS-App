@@ -20,7 +20,7 @@ class BaiduOCRService: OCRType {
     init() { }
 
     func OCR(with image: UIImage, completion: @escaping (String?) -> Void) {
-        guard let imageData = UIImageJPEGRepresentation(image, 0) else {
+        guard let imageData = image.jpegData(compressionQuality: 0) else {
             completion(nil)
             return
         }

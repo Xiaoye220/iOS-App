@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var i = 0
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         // 让音乐可以在后台运行
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             try session.setActive(true)
             // 设置 option 为 mixWithOthers，否则打开其他带音频播放的app，本 app 的 avplayer 会停止播放，就无法保持后台一直运行了
-            try session.setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers)
+            try session.setCategory(AVAudioSession.Category.playback, mode: .default, options: AVAudioSession.CategoryOptions.mixWithOthers)
         } catch {
             print(error)
         }
@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         player.volume = 0
         
         let nvController = window?.rootViewController as! UINavigationController
-        rootController = nvController.topViewController as! RootViewController
+        rootController = nvController.topViewController as? RootViewController
         rootController.viewModel = viewModel
         
         // RxSwift，后台播放音乐保持 app 运行
@@ -90,20 +90,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     func RxConfiguration() {
+        // 监听是否开启 监听截图 的功能
         viewModel.isPlaying.asDriver()
             .drive(onNext: { [weak self] isPlaying in
                 guard let `self` = self else { return }
                 if isPlaying {
                     self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
-                        self.player.seek(to: kCMTimeZero)
-//                        self.i = self.i + 1
-//                        print(self.i)
+                        self.player.seek(to: CMTime.zero)
                     }
                     self.player.play()
                 } else {
                     self.timer?.invalidate()
                     self.player.pause()
-                    self.player.seek(to: kCMTimeZero)
+                    self.player.seek(to: CMTime.zero)
                 }
             })
             .disposed(by: disposeBag)

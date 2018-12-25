@@ -72,9 +72,9 @@ class NavigationSetting {
     fileprivate var titleColor: UIColor = .black {
         didSet {
             if let _ = vc?.navigationController?.navigationBar.titleTextAttributes {
-                vc?.navigationController?.navigationBar.titleTextAttributes![NSAttributedStringKey.foregroundColor] = titleColor
+                vc?.navigationController?.navigationBar.titleTextAttributes![NSAttributedString.Key.foregroundColor] = titleColor
             }
-            vc?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: titleColor]
+            vc?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: titleColor]
         }
     }
     
@@ -94,7 +94,7 @@ class NavigationSetting {
         didSet { vc?.navigationController?.navigationBar.shadowImage = shadowImage }
     }
     
-    fileprivate var titleTextAttributes: [NSAttributedStringKey : Any]? {
+    fileprivate var titleTextAttributes: [NSAttributedString.Key : Any]? {
         didSet {
            vc?.navigationController?.navigationBar.titleTextAttributes = titleTextAttributes
         }
@@ -202,7 +202,7 @@ extension NavigationSetting {
     }
 
     @discardableResult
-    func titleTextAttributes(_ titleTextAttributes: [NSAttributedStringKey : Any]?) -> NavigationSetting {
+    func titleTextAttributes(_ titleTextAttributes: [NSAttributedString.Key : Any]?) -> NavigationSetting {
         self.titleTextAttributes = titleTextAttributes
         return self
     }

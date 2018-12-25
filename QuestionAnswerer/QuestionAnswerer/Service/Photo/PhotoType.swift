@@ -12,7 +12,7 @@ import Photos
 
 protocol PhotoType {
     
-    weak var delegate: PhotoDelegate! { get set }
+    var delegate: PhotoDelegate! { get set }
     
     //开始获取图片
     func beginObserve()
