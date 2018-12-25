@@ -78,12 +78,17 @@ class BaiduSearchQuestionOnlyService: BaiduSearchType {
         var count_2 = finalText.components(separatedBy: answer_2).count - 1
         var count_3 = finalText.components(separatedBy: answer_3).count - 1
         
-        print(finalText)
         
         if count_1 == 0 && count_2 == 0 && count_3 == 0 {
-            count_1 = (finalText.components(separatedBy: CharacterSet(charactersIn: answer_1)).count - 1) / answer_1.count
-            count_2 = (finalText.components(separatedBy: CharacterSet(charactersIn: answer_2)).count - 1) / answer_2.count
-            count_3 = (finalText.components(separatedBy: CharacterSet(charactersIn: answer_3)).count - 1) / answer_3.count
+            if !answer_1.isEmpty {
+                count_1 = (finalText.components(separatedBy: CharacterSet(charactersIn: answer_1)).count - 1) / answer_1.count
+            }
+            if !answer_2.isEmpty {
+                count_2 = (finalText.components(separatedBy: CharacterSet(charactersIn: answer_2)).count - 1) / answer_2.count
+            }
+            if !answer_3.isEmpty {
+                count_3 = (finalText.components(separatedBy: CharacterSet(charactersIn: answer_3)).count - 1) / answer_3.count
+            }
         }
         
         var result = [(answer_1, count_1),
